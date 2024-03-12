@@ -1,14 +1,14 @@
+import "./globals.css"
+
 import type { Metadata } from "next"
-import { Inter as FontSans } from "next/font/google"
+import { Poppins as FontSans } from "next/font/google"
 
 import { cn } from "@/lib/utils"
 
-import "./globals.css"
-
 const fontSans = FontSans({
   subsets: ["latin"],
+  weight: ["300", "600"],
   variable: "--font-sans",
-  weight: ["400", "500", "600", "700"],
 })
 
 export const metadata: Metadata = {
@@ -17,15 +17,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
-    <html lang="pt-Br">
+    <html lang="pt-BR" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.className,
+          fontSans.variable,
+          "min-h-dvh bg-background font-sans antialiased",
         )}
       >
         {children}
