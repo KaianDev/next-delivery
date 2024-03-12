@@ -1,3 +1,4 @@
+// Components
 import { Header } from "./_components/header"
 
 const HomePage = () => {
