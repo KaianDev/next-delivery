@@ -5,7 +5,11 @@ import { cn } from "@/lib/utils"
 
 import "./globals.css"
 
-const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" })
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  weight: ["400", "500", "600", "700"],
+})
 
 export const metadata: Metadata = {
   title: "Next Delivery",
@@ -20,8 +24,8 @@ export default function RootLayout({
     <html lang="pt-Br">
       <body
         className={cn(
+          "min-h-screen bg-background font-sans antialiased",
           fontSans.className,
-          "bg-background min-h-screen font-sans antialiased",
         )}
       >
         {children}
