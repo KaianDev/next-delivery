@@ -1,7 +1,4 @@
-"use client"
-
 import { useApi } from "@/lib/api"
-import { useLayoutEffect, useState } from "react"
 
 interface TenantLayoutProps {
   children: React.ReactNode
@@ -10,34 +7,22 @@ interface TenantLayoutProps {
   }
 }
 
-const TenantLayout = ({ children, params }: TenantLayoutProps) => {
-  const [loading, setLoading] = useState(true)
+const TenantLayout = async ({ children, params }: TenantLayoutProps) => {
   const api = useApi()
+  const tenant = api.getTenant(params.tenant)
 
-  const setTenantColor = () => {
-    const tenant = api.getTenant(params.tenant)
-    if (tenant) {
-      document.body.style.setProperty("--tenant", tenant.color)
-      document.body.style.setProperty(
-        "--tenant-opacity",
-        `${tenant.color} / 30%`,
-      )
-    }
-    setLoading(false)
-  }
-
-  useLayoutEffect(() => {
-    setTenantColor()
-  }, [])
-
-  if (loading)
-    return (
-      <div className="flex h-screen w-full items-center justify-center text-2xl font-bold">
-        Loading...
-      </div>
-    )
-
-  return <>{children}</>
+  return (
+    <body
+      style={
+        {
+          "--tenant": tenant ? tenant.color : "0 0% 100%",
+          "--tenant-opacity": tenant ? `${tenant.color}/30%` : "0 5% 16%/50%",
+        } as React.CSSProperties
+      }
+    >
+      {children}
+    </body>
+  )
 }
 
 export default TenantLayout
