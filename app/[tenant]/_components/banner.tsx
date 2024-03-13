@@ -9,7 +9,7 @@ import "swiper/css"
 
 export const Banner = () => {
   return (
-    <div className="p-6">
+    <div className="container mx-auto p-6">
       <Swiper
         spaceBetween={24}
         className="h-52"
@@ -29,7 +29,7 @@ export const Banner = () => {
             width={0}
             height={0}
             sizes="100"
-            className="h-48 w-full rounded-xl object-cover shadow-md shadow-black/30"
+            className="h-48 w-full rounded-xl object-contain shadow-md shadow-black/30"
           />
         </SwiperSlide>
         <SwiperSlide>

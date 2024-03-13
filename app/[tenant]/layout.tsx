@@ -10,7 +10,7 @@ const TenantLayout = ({ children }: TenantLayoutProps) => {
   const [loading, setLoading] = useState(true)
 
   useLayoutEffect(() => {
-    const color = "#fb9400"
+    const color = "35 100 49"
     document.body.style.setProperty("--tenant", color)
     setLoading(false)
   }, [])

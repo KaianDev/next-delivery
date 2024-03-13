@@ -23,7 +23,11 @@ const config = {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
       colors: {
-        tenant: "var(--tenant)",
+        tenant: {
+          DEFAULT: "hsl(var(--tenant))",
+          opacity: "hsl(var(--tenant-opacity))",
+        },
+
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
