@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 
 import { Menu } from "lucide-react"

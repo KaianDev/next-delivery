@@ -1,6 +1,8 @@
-import { Product } from "@/types/product"
-import Image from "next/image"
 import Link from "next/link"
+import Image from "next/image"
+
+// Utilities
+import type { Product } from "@/types/product"
 
 interface ProductItemProps {
   product: Product

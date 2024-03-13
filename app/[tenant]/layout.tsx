@@ -1,4 +1,4 @@
-import { useApi } from "@/lib/api"
+import { useApi } from "@/lib/use-api"
 
 interface TenantLayoutProps {
   children: React.ReactNode

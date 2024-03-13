@@ -1,10 +1,13 @@
+import type { Metadata } from "next"
+import { notFound } from "next/navigation"
+
 // Components
-import { Metadata } from "next"
 import { Banner } from "./_components/banner"
 import { Header } from "./_components/header"
 import { ProductGrid } from "./_components/product-grid"
-import { useApi } from "@/lib/api"
-import { notFound } from "next/navigation"
+
+// Utilities
+import { useApi } from "@/lib/use-api"
 
 interface HomePageProps {
   params: {
