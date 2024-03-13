@@ -25,7 +25,7 @@ export default function RootLayout({
       <body
         className={cn(
           fontSans.variable,
-          "min-h-dvh bg-background font-sans antialiased",
+          "min-h-dvh bg-zinc-100 font-sans antialiased",
         )}
       >
         {children}
