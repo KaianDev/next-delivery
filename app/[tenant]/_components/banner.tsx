@@ -29,7 +29,7 @@ export const Banner = () => {
             width={0}
             height={0}
             sizes="100"
-            className="h-48 w-full rounded-xl object-contain shadow-md shadow-black/30"
+            className="h-48 w-full rounded-xl object-cover shadow-md shadow-black/30"
           />
         </SwiperSlide>
         <SwiperSlide>

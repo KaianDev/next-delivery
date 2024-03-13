@@ -8,8 +8,8 @@ interface ProductItemProps {
 
 export const ProductItem = ({ product }: ProductItemProps) => {
   return (
-    <Link href="/produto/">
-      <div className="bg-product-item flex flex-col items-center overflow-hidden rounded-xl p-3 shadow-lg">
+    <Link href={`/produto/${product.id}`}>
+      <div className="bg-product-item flex flex-col items-center overflow-hidden rounded-xl border p-3 shadow-lg">
         <Image
           src={product.imageUrl}
           width={0}

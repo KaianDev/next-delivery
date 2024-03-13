@@ -25,7 +25,7 @@
     --ring: 0 0% 3.9%;
     --radius: 0rem;
     --tenant: 0 0% 100%;
-    --tenant-opacity: 0 5% 16% 50%;
+    --tenant-opacity: 0 5% 16%/50%;
   }
 
   .dark {
