@@ -9,7 +9,7 @@ import { SearchInput } from "./search-input"
 
 export const Header = () => {
   return (
-    <header className="space-y-6 border-b bg-[#f9f9f9] p-6 pb-7 shadow">
+    <header className="space-y-6 border-b bg-black/10 p-6 pb-7 shadow">
       <div className="flex justify-between">
         <div>
           <h1 className="text-2xl font-medium">Seja Bem Vindo(a) 👋</h1>

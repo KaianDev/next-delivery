@@ -1,13 +1,13 @@
 import "./globals.css"
 
 import type { Metadata } from "next"
-import { Poppins as FontSans } from "next/font/google"
+import { Inter as FontSans } from "next/font/google"
 
 import { cn } from "@/lib/utils"
 
 const fontSans = FontSans({
   subsets: ["latin"],
-  weight: ["300", "600"],
+  weight: ["300", "400", "500", "600"],
   variable: "--font-sans",
 })
 
