@@ -1,18 +1,33 @@
 "use client"
 
+import { useApi } from "@/lib/api"
 import { useLayoutEffect, useState } from "react"
 
 interface TenantLayoutProps {
   children: React.ReactNode
+  params: {
+    tenant: string
+  }
 }
 
-const TenantLayout = ({ children }: TenantLayoutProps) => {
+const TenantLayout = ({ children, params }: TenantLayoutProps) => {
   const [loading, setLoading] = useState(true)
+  const api = useApi()
+
+  const setTenantColor = () => {
+    const tenant = api.getTenant(params.tenant)
+    if (tenant) {
+      document.body.style.setProperty("--tenant", tenant.color)
+      document.body.style.setProperty(
+        "--tenant-opacity",
+        `${tenant.color} / 30%`,
+      )
+    }
+    setLoading(false)
+  }
 
   useLayoutEffect(() => {
-    const color = "35 100 49"
-    document.body.style.setProperty("--tenant", color)
-    setLoading(false)
+    setTenantColor()
   }, [])
 
   if (loading)
