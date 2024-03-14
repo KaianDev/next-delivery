@@ -1,4 +1,4 @@
-import { useApi } from "@/lib/use-api"
+import { frontEndAPI } from "@/lib/frontend-api"
 
 interface TenantLayoutProps {
   children: React.ReactNode
@@ -8,7 +8,7 @@ interface TenantLayoutProps {
 }
 
 const TenantLayout = async ({ children, params }: TenantLayoutProps) => {
-  const api = useApi()
+  const api = frontEndAPI()
   const tenant = api.getTenant(params.tenant)
 
   return (

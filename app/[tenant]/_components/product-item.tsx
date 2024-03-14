@@ -3,7 +3,7 @@ import Image from "next/image"
 
 // Utilities
 import type { Product } from "@/types/product"
-import { useApi } from "@/lib/use-api"
+import { useApi } from "@/lib/frontend-api"
 
 interface ProductItemProps {
   product: Product

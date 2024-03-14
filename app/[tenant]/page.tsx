@@ -7,7 +7,7 @@ import { Header } from "./_components/header"
 import { ProductGrid } from "./_components/product-grid"
 
 // Utilities
-import { useApi } from "@/lib/use-api"
+import { frontEndAPI } from "@/lib/frontend-api"
 
 interface HomePageProps {
   params: {
@@ -16,15 +16,15 @@ interface HomePageProps {
 }
 
 export const generateMetadata = ({ params }: HomePageProps): Metadata => {
-  const api = useApi()
+  const api = frontEndAPI()
   const tenant = api.getTenant(params.tenant)
   return {
-    title: tenant ? `Next Delivery | ${tenant.name}` : "Página não encontrada",
+    title: tenant ? tenant.name : "Página não encontrada",
   }
 }
 
 const HomePage = async ({ params }: HomePageProps) => {
-  const api = useApi()
+  const api = frontEndAPI()
   const tenant = api.getTenant(params.tenant)
   if (!tenant) return notFound()
 

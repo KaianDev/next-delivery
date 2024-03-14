@@ -1,6 +1,6 @@
 import type { Tenant } from "@/types/tenant"
 
-export const useApi = () => ({
+export const frontEndAPI = () => ({
   getTenant: (tenantSlug: string): Tenant | false => {
     switch (tenantSlug) {
       case "next-burger":
