@@ -48,7 +48,7 @@ export const SearchInput = () => {
       <input
         {...form.register("search")}
         type="search"
-        className="w-full border-0 text-lg outline-none"
+        className="w-full border-0 bg-white text-lg outline-none"
         placeholder="Digite o nome do seu produto"
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}

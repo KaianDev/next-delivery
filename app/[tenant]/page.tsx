@@ -32,7 +32,7 @@ const HomePage = async ({ params }: HomePageProps) => {
     <>
       <Header />
       <Banner />
-      <ProductGrid />
+      <ProductGrid tenantSlug={tenant.slug} />
     </>
   )
 }
