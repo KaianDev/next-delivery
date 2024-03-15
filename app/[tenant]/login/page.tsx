@@ -1,9 +1,15 @@
-import { CustomButton } from "@/components/custom-button"
-import { CustomInput } from "@/components/custom-input"
-import { Header } from "@/components/header"
-import { frontEndAPI } from "@/lib/frontend-api"
-import { Metadata } from "next"
+import Link from "next/link"
 import { notFound } from "next/navigation"
+import { Metadata } from "next"
+
+// Components
+import { Line } from "@/components/line"
+import { LoginForm } from "./_components/login-form"
+import { CustomButton } from "@/components/custom-button"
+import { Header } from "@/components/header"
+
+// Utilities
+import { frontEndAPI } from "@/lib/frontend-api"
 
 interface LoginPageProps {
   params: {
@@ -25,12 +31,35 @@ const LoginPage = ({ params }: LoginPageProps) => {
   if (!tenant) return notFound()
 
   return (
-    <div className="container space-y-4 bg-white pt-12">
+    <div className="container max-w-lg bg-white py-12 ">
       <Header backHref={`/${tenant.slug}`} />
-      <CustomInput placeholder="Digite seu e-mail" color={tenant.color} />
-      <CustomInput placeholder="Digite sua senha" type="password" />
-      <CustomButton mainColor={tenant.color}>AA</CustomButton>
-      <CustomButton inverter>BB</CustomButton>
+      <div className="mb-10 mt-5 text-center text-4xl font-bold text-zinc-900">
+        {tenant.name}
+      </div>
+
+      <div className="relative mx-auto w-fit border-b border-tenant-primary pb-10 text-center text-lg leading-6">
+        Use suas credenciais para <br /> realizar o login.
+      </div>
+
+      <Line className="mb-14" />
+
+      <LoginForm />
+
+      <div className="relative mx-auto mt-10 w-fit border-b border-tenant-primary pb-10">
+        Esqueceu sua senha?{" "}
+        <Link
+          href={`/${tenant.slug}/sign-up`}
+          className="text-tenant-primary hover:underline"
+        >
+          Clique aqui
+        </Link>
+      </div>
+
+      <Line className="mb-14" />
+
+      <Link href={`/${tenant.slug}/sign-up`}>
+        <CustomButton hollow>Quero me cadastrar</CustomButton>
+      </Link>
     </div>
   )
 }

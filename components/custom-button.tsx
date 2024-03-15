@@ -9,20 +9,20 @@ import { Button } from "./ui/button"
 import { cn } from "@/lib/utils"
 
 interface CustomButtonProps extends ComponentProps<"button"> {
-  inverter?: boolean
+  hollow?: boolean
 }
 
 export const CustomButton = ({
   children,
   className,
-  inverter,
+  hollow,
   ...rest
 }: CustomButtonProps) => {
   return (
     <button
       className={cn(
         "h-14 w-full rounded border-2 border-tenant-primary bg-tenant-primary text-base font-semibold text-white duration-300 ease-linear hover:scale-105",
-        inverter && "bg-transparent text-tenant-primary hover:bg-transparent",
+        hollow && "bg-transparent text-tenant-primary",
         className,
       )}
       {...rest}
