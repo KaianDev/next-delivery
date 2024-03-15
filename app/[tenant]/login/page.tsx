@@ -10,6 +10,8 @@ import { Header } from "@/components/header"
 
 // Utilities
 import { frontEndAPI } from "@/lib/frontend-api"
+import { TenantTitle } from "../_components/tenant-title"
+import { TenantLabel } from "../_components/tenant-label"
 
 interface LoginPageProps {
   params: {
@@ -31,15 +33,14 @@ const LoginPage = ({ params }: LoginPageProps) => {
   if (!tenant) return notFound()
 
   return (
-    <div className="container max-w-lg bg-white py-12 ">
+    <div className="container max-w-lg bg-white py-12">
       <Header backHref={`/${tenant.slug}`} />
-      <div className="mb-10 mt-5 text-center text-4xl font-bold text-zinc-900">
-        {tenant.name}
-      </div>
 
-      <div className="relative mx-auto w-fit border-b border-tenant-primary pb-10 text-center text-lg leading-6">
+      <TenantTitle tenantName={tenant.name} />
+
+      <TenantLabel>
         Use suas credenciais para <br /> realizar o login.
-      </div>
+      </TenantLabel>
 
       <Line className="mb-14" />
 
