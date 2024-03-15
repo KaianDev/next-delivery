@@ -14,7 +14,7 @@ export const CustomInput = ({ type = "text", ...rest }: CustomInputProps) => {
     <div className="relative">
       <Input
         type={show ? "text" : type}
-        className="h-14 rounded border-transparent bg-zinc-200/50 outline-none focus:bg-white focus-visible:ring-2 focus-visible:ring-tenant"
+        className="h-14 rounded border-transparent bg-zinc-300/70 outline-none focus:bg-white focus-visible:ring-2 focus-visible:ring-tenant"
         {...rest}
       />
       {type === "password" && (

@@ -10,7 +10,6 @@ import { cn } from "@/lib/utils"
 
 interface CustomButtonProps extends ComponentProps<"button"> {
   inverter?: boolean
-  mainColor?: string
 }
 
 export const CustomButton = ({
