@@ -35,14 +35,14 @@ export const SearchInput = () => {
       onSubmit={form.handleSubmit(handleSearchSubmit)}
       className={cn(
         "flex items-center justify-center gap-3 rounded border bg-white p-1 px-2",
-        focused && "border-tenant",
+        focused && "border-tenant-primary",
       )}
     >
       <button
         type="submit"
         className="flex aspect-square size-12 items-center justify-center rounded bg-[#fbfbf9]"
       >
-        <Search strokeWidth="2.5" className="text-tenant" size={24} />
+        <Search strokeWidth="2.5" className="text-tenant-primary" size={24} />
       </button>
 
       <input

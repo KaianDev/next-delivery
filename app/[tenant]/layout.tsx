@@ -15,8 +15,8 @@ const TenantLayout = async ({ children, params }: TenantLayoutProps) => {
     <body
       style={
         {
-          "--tenant": tenant ? tenant.color : "0 0% 100%",
-          "--tenant-opacity": tenant ? `${tenant.color}/30%` : "0 5% 16%/50%",
+          "--tenant-primary": tenant ? tenant.primary : "#222",
+          "--tenant-secondary": tenant ? tenant.secondary : "#ccc",
         } as React.CSSProperties
       }
     >

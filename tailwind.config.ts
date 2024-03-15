@@ -24,10 +24,9 @@ const config = {
       },
       colors: {
         tenant: {
-          DEFAULT: "hsl(var(--tenant))",
-          opacity: "hsl(var(--tenant-opacity))",
+          primary: "var(--tenant-primary)",
+          secondary: "var(--tenant-secondary)",
         },
-
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

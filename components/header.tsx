@@ -14,7 +14,7 @@ export const Header = ({ title, backHref }: HeaderProps) => {
     <header className="flex h-12 items-center">
       <Link href={backHref}>
         <Button size="icon" variant="ghost">
-          <ArrowLeft size={24} className="text-tenant" />
+          <ArrowLeft size={24} className="text-tenant-primary" />
         </Button>
       </Link>
       <div className="flex-1 text-center">

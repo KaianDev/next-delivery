@@ -1,9 +1,7 @@
-import Link from "next/link"
 import Image from "next/image"
 
 // Utilities
 import type { Product } from "@/types/product"
-import { useApi } from "@/lib/frontend-api"
 
 interface ProductItemProps {
   product: Product
@@ -23,7 +21,7 @@ export const ProductItem = ({ product }: ProductItemProps) => {
       <div className="self-start">
         <p className="text-xs font-medium leading-none">{product.category}</p>
         <strong className="text-lg">{product.name}</strong>
-        <p className="font-bold leading-none text-tenant">
+        <p className="font-bold leading-none text-tenant-primary">
           {product.price.toLocaleString("pt-br", {
             style: "currency",
             currency: "brl",

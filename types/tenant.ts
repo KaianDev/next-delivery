@@ -1,5 +1,7 @@
 export interface Tenant {
   name: string
-  color: string
+  primary: string
+  secondary: string
   slug: string
+  brand?: string
 }

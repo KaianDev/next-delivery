@@ -24,8 +24,8 @@
     --input: 0 0% 89.8%;
     --ring: 0 0% 3.9%;
     --radius: 0rem;
-    --tenant: 0 0% 11%;
-    --tenant-opacity: 0 0% 11%/50%;
+    --tenant-primary: #222;
+    --tenant-secondary: #ccc;
   }
 
   .dark {
@@ -54,22 +54,22 @@
 .bg-product-item {
   background-image: -moz-linear-gradient(
     to bottom,
-    hsl(var(--tenant-opacity)) 50%,
+    var(--tenant-secondary) 50%,
     #fff 50%
   );
   background-image: -webkit-linear-gradient(
     to bottom,
-    hsl(var(--tenant-opacity)) 50%,
+    var(--tenant-secondary) 50%,
     #fff 50%
   );
   background-image: -o-linear-gradient(
     to bottom,
-    hsl(var(--tenant-opacity)) 50%,
+    var(--tenant-secondary) 50%,
     #fff 50%
   );
   background-image: linear-gradient(
     to bottom,
-    hsl(var(--tenant-opacity)) 50%,
+    var(--tenant-secondary) 50%,
     #fff 50%
   );
 }
