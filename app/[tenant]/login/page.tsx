@@ -7,11 +7,11 @@ import { Line } from "@/components/line"
 import { LoginForm } from "./_components/login-form"
 import { CustomButton } from "@/components/custom-button"
 import { Header } from "@/components/header"
+import { TenantTitle } from "../_components/tenant-title"
+import { Description } from "../_components/tenant-label"
 
 // Utilities
 import { frontEndAPI } from "@/lib/frontend-api"
-import { TenantTitle } from "../_components/tenant-title"
-import { TenantLabel } from "../_components/tenant-label"
 
 interface LoginPageProps {
   params: {
@@ -38,9 +38,9 @@ const LoginPage = ({ params }: LoginPageProps) => {
 
       <TenantTitle tenantName={tenant.name} />
 
-      <TenantLabel>
+      <Description>
         Use suas credenciais para <br /> realizar o login.
-      </TenantLabel>
+      </Description>
 
       <Line className="mb-14" />
 
@@ -49,7 +49,7 @@ const LoginPage = ({ params }: LoginPageProps) => {
       <div className="relative mx-auto mt-10 w-fit border-b border-tenant-primary pb-10">
         Esqueceu sua senha?{" "}
         <Link
-          href={`/${tenant.slug}/sign-up`}
+          href={`/${tenant.slug}/forget`}
           className="text-tenant-primary hover:underline"
         >
           Clique aqui
