@@ -16,23 +16,24 @@ interface HomePageProps {
 }
 
 export const generateMetadata = ({ params }: HomePageProps): Metadata => {
-  const api = frontEndAPI()
-  const tenant = api.getTenant(params.tenant)
+  const api = frontEndAPI(params.tenant)
+  const tenant = api.getTenant()
   return {
     title: tenant ? tenant.name : "Página não encontrada",
   }
 }
 
 const HomePage = async ({ params }: HomePageProps) => {
-  const api = frontEndAPI()
-  const tenant = api.getTenant(params.tenant)
+  const api = frontEndAPI(params.tenant)
+  const tenant = api.getTenant()
   if (!tenant) return notFound()
+  const products = api.getAllProducts()
 
   return (
     <>
       <Header />
       <Banner />
-      <ProductGrid tenantSlug={tenant.slug} />
+      <ProductGrid data={products} tenantSlug={tenant.slug} />
     </>
   )
 }

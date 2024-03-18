@@ -18,16 +18,16 @@ interface ForgetPageProps {
 }
 
 export const generateMetadata = ({ params }: ForgetPageProps): Metadata => {
-  const api = frontEndAPI()
-  const tenant = api.getTenant(params.tenant)
+  const api = frontEndAPI(params.tenant)
+  const tenant = api.getTenant()
   return {
     title: tenant ? `Esqueceu senha | ${tenant.name}` : "Página não encontrada",
   }
 }
 
 const ForgetPage = ({ params }: ForgetPageProps) => {
-  const api = frontEndAPI()
-  const tenant = api.getTenant(params.tenant)
+  const api = frontEndAPI(params.tenant)
+  const tenant = api.getTenant()
   if (!tenant) {
     return notFound()
   }

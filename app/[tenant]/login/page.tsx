@@ -20,16 +20,16 @@ interface LoginPageProps {
 }
 
 export const generateMetadata = ({ params }: LoginPageProps): Metadata => {
-  const api = frontEndAPI()
-  const tenant = api.getTenant(params.tenant)
+  const api = frontEndAPI(params.tenant)
+  const tenant = api.getTenant()
   return {
     title: tenant ? `Login | ${tenant.name}` : "Página não encontrada",
   }
 }
 
 const LoginPage = ({ params }: LoginPageProps) => {
-  const api = frontEndAPI()
-  const tenant = api.getTenant(params.tenant)
+  const api = frontEndAPI(params.tenant)
+  const tenant = api.getTenant()
   if (!tenant) return notFound()
 
   return (

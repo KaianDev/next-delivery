@@ -19,8 +19,8 @@ interface SignUpPageProps {
 }
 
 export const generateMetadata = ({ params }: SignUpPageProps): Metadata => {
-  const api = frontEndAPI()
-  const tenant = api.getTenant(params.tenant)
+  const api = frontEndAPI(params.tenant)
+  const tenant = api.getTenant()
 
   return {
     title: tenant ? `Cadastre-se | ${tenant.name}` : "Página não encontrada",
@@ -28,8 +28,8 @@ export const generateMetadata = ({ params }: SignUpPageProps): Metadata => {
 }
 
 const SignUpPage = ({ params }: SignUpPageProps) => {
-  const api = frontEndAPI()
-  const tenant = api.getTenant(params.tenant)
+  const api = frontEndAPI(params.tenant)
+  const tenant = api.getTenant()
 
   if (!tenant) return notFound()
 

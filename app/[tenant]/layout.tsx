@@ -8,8 +8,8 @@ interface TenantLayoutProps {
 }
 
 const TenantLayout = async ({ children, params }: TenantLayoutProps) => {
-  const api = frontEndAPI()
-  const tenant = api.getTenant(params.tenant)
+  const api = frontEndAPI(params.tenant)
+  const tenant = api.getTenant()
 
   return (
     <body

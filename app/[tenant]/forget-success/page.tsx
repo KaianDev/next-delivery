@@ -19,8 +19,8 @@ interface ForgetSuccessPagePros {
 export const generateMetadata = ({
   params,
 }: ForgetSuccessPagePros): Metadata => {
-  const api = frontEndAPI()
-  const tenant = api.getTenant(params.tenant)
+  const api = frontEndAPI(params.tenant)
+  const tenant = api.getTenant()
 
   return {
     title: tenant ? `E-mail Enviado | ${tenant.name}` : "Página não encontrada",
@@ -28,8 +28,8 @@ export const generateMetadata = ({
 }
 
 const ForgetSuccessPage = ({ params }: ForgetSuccessPagePros) => {
-  const api = frontEndAPI()
-  const tenant = api.getTenant(params.tenant)
+  const api = frontEndAPI(params.tenant)
+  const tenant = api.getTenant()
 
   if (!tenant) {
     return notFound()
