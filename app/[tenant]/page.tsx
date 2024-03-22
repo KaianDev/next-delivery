@@ -31,7 +31,7 @@ const HomePage = async ({ params }: HomePageProps) => {
 
   return (
     <>
-      <Header />
+      <Header tenantSlug={tenant.slug} />
       <Banner />
       <ProductGrid data={products} tenantSlug={tenant.slug} />
     </>
