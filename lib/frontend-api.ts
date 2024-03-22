@@ -3,7 +3,7 @@ import type { Tenant } from "@/types/tenant"
 
 const TEMPORARYproduct: Product = {
   id: 1,
-  imageUrl: "/temp/burger1.png",
+  imageUrl: "/temp/burger-5.png",
   name: "Texas Burger",
   category: "Tradicional",
   price: 25.5,

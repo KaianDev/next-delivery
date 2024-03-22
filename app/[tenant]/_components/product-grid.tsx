@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { ProductItem } from "./product-item"
-import { Product } from "@/types/product"
+import type { Product } from "@/types/product"
 import { useState } from "react"
 
 interface ProductGridProps {

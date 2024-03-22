@@ -1,8 +1,13 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
 import { Minus, Plus } from "lucide-react"
+
+// Components
+import { Button } from "@/components/ui/button"
+
+// Utilities
+import { formatQuantity } from "@/helpers/formatQuantity"
+import { cn } from "@/lib/utils"
 
 interface QuantityProps {
   initialValue: number
@@ -27,13 +32,6 @@ export const Quantity = ({
     if (initialValue !== min) setQuantity(initialValue - 1)
   }
 
-  const formattedInitialValue = () => {
-    if (initialValue < 10) {
-      return `0${initialValue}`
-    }
-    return initialValue
-  }
-
   return (
     <div
       className={cn(
@@ -50,7 +48,7 @@ export const Quantity = ({
         <Minus />
       </Button>
       <div className="flex items-center justify-center text-lg font-bold text-tenant-primary">
-        {formattedInitialValue()}
+        {formatQuantity(initialValue, 2)}
       </div>
       <Button
         disabled={initialValue === max}

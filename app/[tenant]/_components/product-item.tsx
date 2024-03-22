@@ -2,6 +2,7 @@ import Image from "next/image"
 
 // Utilities
 import type { Product } from "@/types/product"
+import { formatMoney } from "@/helpers/formatMoney"
 
 interface ProductItemProps {
   product: Product
@@ -22,10 +23,7 @@ export const ProductItem = ({ product }: ProductItemProps) => {
         <p className="text-xs font-medium leading-none">{product.category}</p>
         <strong className="text-lg">{product.name}</strong>
         <p className="font-bold leading-none text-tenant-primary">
-          {product.price.toLocaleString("pt-br", {
-            style: "currency",
-            currency: "brl",
-          })}
+          {formatMoney(product.price)}
         </p>
       </div>
     </div>
