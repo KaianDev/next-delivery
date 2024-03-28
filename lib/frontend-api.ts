@@ -45,14 +45,14 @@ export const frontEndAPI = (tenantSlug: string) => ({
     const products: Product[] = []
 
     for (let i = 0; i < 10; i++) {
-      products.push(TEMPORARYproduct)
+      products.push({ ...TEMPORARYproduct, id: i + 1 })
     }
 
     return products
   },
 
-  getProduct: (id: string) => {
-    return TEMPORARYproduct
+  getProduct: (id: number): Product => {
+    return { ...TEMPORARYproduct, id }
   },
 
   authorizeToken: async (token: string): Promise<User | false> => {

@@ -4,7 +4,7 @@ import Image from "next/image"
 
 // Components
 import { Header } from "@/components/header"
-import { AddBagForm } from "../_components/add-bag-form"
+import { AddCartForm } from "../_components/add-cart-form"
 
 // Utilities
 import { frontEndAPI } from "@/lib/frontend-api"
@@ -22,7 +22,7 @@ export const generateMetadata = ({
 }: ProductItemPageProps): Metadata => {
   const api = frontEndAPI(params.tenant)
   const tenant = api.getTenant()
-  const product = api.getProduct(params.id)
+  const product = api.getProduct(parseInt(params.id))
 
   return {
     title:
@@ -35,7 +35,7 @@ export const generateMetadata = ({
 const ProductItemPage = async ({ params }: ProductItemPageProps) => {
   const api = frontEndAPI(params.tenant)
   const tenant = await api.getTenant()
-  const product = await api.getProduct(params.id)
+  const product = await api.getProduct(parseInt(params.id))
 
   if (!tenant) {
     return notFound()
@@ -65,7 +65,7 @@ const ProductItemPage = async ({ params }: ProductItemPageProps) => {
         <p className="mb-6 break-words text-left text-base text-muted-foreground md:text-lg">
           {product.description}
         </p>
-        <AddBagForm productPrice={product.price} />
+        <AddCartForm product={product} tenantSlug={tenant.slug} />
       </div>
     </div>
   )
