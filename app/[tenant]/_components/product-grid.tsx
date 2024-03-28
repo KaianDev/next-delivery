@@ -10,37 +10,6 @@ interface ProductGridProps {
   data: Product[]
 }
 
-// const data: Product[] = [
-//   {
-//     id: 1,
-//     imageUrl: "/temp/burger1.png",
-//     name: "Texas Burger",
-//     category: "Tradicional",
-//     price: 25.5,
-//   },
-//   {
-//     id: 2,
-//     imageUrl: "/temp/burger2.png",
-//     name: "Monster Burger",
-//     category: "Tradicional",
-//     price: 25.5,
-//   },
-//   {
-//     id: 3,
-//     imageUrl: "/temp/burger3.png",
-//     name: "Old Burger",
-//     category: "Tradicional",
-//     price: 25.5,
-//   },
-//   {
-//     id: 4,
-//     imageUrl: "/temp/burger4.png",
-//     name: "Golden Burger",
-//     category: "Tradicional",
-//     price: 25.5,
-//   },
-// ]
-
 export const ProductGrid = ({ tenantSlug, data }: ProductGridProps) => {
   // TODO: GET Products
   const [products, setProducts] = useState<Product[]>(data)
