@@ -44,7 +44,7 @@ const LoginPage = ({ params }: LoginPageProps) => {
 
       <Line className="mb-14" />
 
-      <LoginForm />
+      <LoginForm tenantSlug={tenant.slug} />
 
       <div className="relative mx-auto mt-10 w-fit border-b border-tenant-primary pb-10">
         Esqueceu sua senha?{" "}

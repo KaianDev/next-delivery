@@ -6,6 +6,7 @@ import {
 } from "./types"
 import type { User } from "@/types/user"
 import { initialState, reducer } from "./reducer"
+import { deleteCookie, setCookie } from "cookies-next"
 
 interface IAuthContext {
   auth: DataState
@@ -21,6 +22,7 @@ export const AuthContextProvider = ({
   const [auth, dispatch] = useReducer(reducer, initialState)
 
   const login = (user: User, token: string) => {
+    setCookie("delivery.token", token)
     dispatch({
       type: AuthActions.LOGIN,
       payload: {
@@ -31,6 +33,7 @@ export const AuthContextProvider = ({
   }
 
   const logout = () => {
+    deleteCookie("delivery.token")
     dispatch({
       type: AuthActions.LOGOUT,
       payload: {

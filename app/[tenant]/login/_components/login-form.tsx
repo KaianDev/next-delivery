@@ -14,6 +14,8 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form"
+import { useAuthContext } from "@/contexts/auth"
+import { useRouter } from "next/navigation"
 
 const loginSchema = z.object({
   email: z
@@ -26,7 +28,11 @@ const loginSchema = z.object({
 
 type LoginSchema = z.infer<typeof loginSchema>
 
-export const LoginForm = () => {
+interface LoginFormProps {
+  tenantSlug: string
+}
+
+export const LoginForm = ({ tenantSlug }: LoginFormProps) => {
   const form = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -35,8 +41,18 @@ export const LoginForm = () => {
     },
   })
 
+  const { login } = useAuthContext()
+  const router = useRouter()
+
   const handleLoginSubmit = (data: LoginSchema) => {
-    console.log({ data })
+    login(
+      {
+        email: data.email,
+        name: "Kaian",
+      },
+      "jasdçlasdkçalskdçalwkçlpowqkepowqkke120-21030213123-0ksaçldçasld",
+    )
+    router.replace(`/${tenantSlug}`)
   }
 
   return (

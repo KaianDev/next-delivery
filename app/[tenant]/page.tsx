@@ -8,6 +8,8 @@ import { ProductGrid } from "./_components/product-grid"
 
 // Utilities
 import { frontEndAPI } from "@/lib/frontend-api"
+import { cookies } from "next/headers"
+import { Home } from "./_components/home"
 
 interface HomePageProps {
   params: {
@@ -28,13 +30,16 @@ const HomePage = async ({ params }: HomePageProps) => {
   const tenant = api.getTenant()
   if (!tenant) return notFound()
   const products = api.getAllProducts()
+  const token = cookies().get("delivery.token")?.value
+  const user = await api.authorizeToken(token as string)
 
   return (
-    <>
-      <Header tenantSlug={tenant.slug} />
-      <Banner />
-      <ProductGrid data={products} tenantSlug={tenant.slug} />
-    </>
+    <Home
+      tenantSlug={tenant.slug}
+      products={products}
+      user={user ? user : null}
+      token={token ?? ""}
+    />
   )
 }
 
