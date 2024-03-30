@@ -1,14 +1,9 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-
-// Components
-import { Banner } from "./_components/banner"
-import { Header } from "./_components/header"
-import { ProductGrid } from "./_components/product-grid"
+import { cookies } from "next/headers"
 
 // Utilities
 import { frontEndAPI } from "@/lib/frontend-api"
-import { cookies } from "next/headers"
 import { Home } from "./_components/home"
 
 interface HomePageProps {
