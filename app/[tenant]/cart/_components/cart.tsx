@@ -11,11 +11,11 @@ import type { CartCookie } from "@/types/cart-cookie"
 // Components
 import { CustomButton } from "@/components/custom-button"
 import { Line } from "@/components/line"
+import { ShippingForm } from "./shippingForm"
+import { CartItem } from "./cart-item"
 
 // Utilities
 import { formatMoney } from "@/helpers/formatMoney"
-import { ShippingForm } from "./shippingForm"
-import { CartItem } from "./cart-item"
 
 interface CartProps {
   cart: CartItemType[]
@@ -28,9 +28,7 @@ export const Cart = ({ cart: data, tenantSlug }: CartProps) => {
   const [shippingPrice, setShippingPrice] = useState(0)
   const [shippingTime, setShippingTime] = useState(0)
   const [shippingAddress, setShippingAddress] = useState("")
-  const [cart, setCart] = useState(data)
-
-  // useEffect(() => {}, [])
+  const [cart, setCart] = useState(data.filter((item) => item.qt > 0))
 
   const handleShippingSubmit = async ({ zipCode }: { zipCode: string }) => {
     setShippingPrice(10.5)
@@ -58,14 +56,16 @@ export const Cart = ({ cart: data, tenantSlug }: CartProps) => {
     const cartCookie: CartCookie[] = []
 
     for (let item of newCart) {
-      cartCookie.push({
-        id: item.product.id,
-        qt: item.qt,
-      })
+      if (item.qt > 0) {
+        cartCookie.push({
+          id: item.product.id,
+          qt: item.qt,
+        })
+      }
     }
 
-    setCart(newCart)
     setCookie(`${tenantSlug}.cart`, JSON.stringify(cartCookie))
+    setCart(newCart)
   }
 
   return (

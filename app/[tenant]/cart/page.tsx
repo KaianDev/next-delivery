@@ -35,7 +35,6 @@ const CartPage = async ({ params }: CartPageProps) => {
   }
 
   const cartCookie = getCookie(`${tenant.slug}.cart`, { cookies })
-  console.log({ cartCookie })
   const cart = await api.getCartProducts(cartCookie as string)
   const token = getCookie("delivery.token", { cookies })
   const user = await api.authorizeToken(token as string)
