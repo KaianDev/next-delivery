@@ -1,3 +1,5 @@
+import { CartCookie } from "@/types/cart-cookie"
+import { CartItem } from "@/types/cart-item"
 import { Product } from "@/types/product"
 import type { Tenant } from "@/types/tenant"
 import { User } from "@/types/user"
@@ -7,7 +9,7 @@ const TEMPORARYproduct: Product = {
   imageUrl: "/temp/burger-5.png",
   name: "Texas Burger",
   category: "Tradicional",
-  price: 25.5,
+  price: 27.5,
   description:
     "2 Blends de carne de 150g, Queijo Cheddar,  Bacon Caramelizado, Salada, Molho da casa, Pão brioche artesanal",
 }
@@ -62,5 +64,28 @@ export const frontEndAPI = (tenantSlug: string) => ({
       name: "Kaian",
       email: "kaian@teste.com",
     }
+  },
+
+  getCartProducts: async (cartCookie: string): Promise<CartItem[]> => {
+    const cart: CartItem[] = []
+
+    if (!cartCookie) return cart
+
+    const cartJSON: CartCookie[] = JSON.parse(cartCookie)
+
+    for (let item of cartJSON) {
+      if (item.id && item.qt) {
+        const product = {
+          ...TEMPORARYproduct,
+          id: item.id,
+        }
+        cart.push({
+          product,
+          qt: item.qt,
+        })
+      }
+    }
+
+    return cart
   },
 })

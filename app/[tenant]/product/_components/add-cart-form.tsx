@@ -25,8 +25,8 @@ export const AddCartForm = ({ product, tenantSlug }: AddCartFormProps) => {
   const handleAddToCartClick = () => {
     const cart: CartCookie[] = []
 
-    if (hasCookie("delivery.cart")) {
-      const cartCookie = getCookie("delivery.cart")
+    if (hasCookie(`${tenantSlug}.cart`)) {
+      const cartCookie = getCookie(`${tenantSlug}.cart`)
       const cartJSON: CartCookie[] = JSON.parse(cartCookie as string)
 
       for (let item of cartJSON) {
@@ -44,7 +44,7 @@ export const AddCartForm = ({ product, tenantSlug }: AddCartFormProps) => {
       cart.push({ id: product.id, qt: quantity })
     }
 
-    setCookie("delivery.cart", JSON.stringify(cart))
+    setCookie(`${tenantSlug}.cart`, JSON.stringify(cart))
 
     router.push(`/${tenantSlug}/cart`)
   }
