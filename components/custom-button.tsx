@@ -21,7 +21,7 @@ export const CustomButton = ({
   return (
     <button
       className={cn(
-        "h-14 w-full rounded border-2 border-tenant-primary bg-tenant-primary text-base font-semibold text-white duration-300 ease-linear hover:scale-105",
+        "h-14 w-full rounded border-2 border-tenant-primary bg-tenant-primary text-base font-semibold text-white duration-300 ease-linear hover:scale-105 disabled:opacity-40 disabled:hover:scale-100",
         hollow && "bg-transparent text-tenant-primary",
         className,
       )}

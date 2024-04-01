@@ -12,7 +12,7 @@ import type { CartCookie } from "@/types/cart-cookie"
 import { CustomButton } from "@/components/custom-button"
 import { Line } from "@/components/line"
 import { ShippingForm } from "./shippingForm"
-import { CartItem } from "./cart-item"
+import { CartItem } from "@/app/[tenant]/_components/cart-item"
 
 // Utilities
 import { formatMoney } from "@/helpers/formatMoney"
@@ -71,9 +71,7 @@ export const Cart = ({ cart: data, tenantSlug }: CartProps) => {
   return (
     <div>
       <div className="py-2">
-        <div>
-          {cart.length} {cart.length === 1 ? "item" : "itens"}
-        </div>
+        {cart.length} {cart.length === 1 ? "item" : "itens"}
       </div>
 
       <div className="my-2 border-b-2">
@@ -81,6 +79,7 @@ export const Cart = ({ cart: data, tenantSlug }: CartProps) => {
           <CartItem
             key={item.product.id}
             cartItem={item}
+            editable
             onChange={handleCartChange}
           />
         ))}
@@ -121,7 +120,7 @@ export const Cart = ({ cart: data, tenantSlug }: CartProps) => {
               {formatMoney(subtotal + shippingPrice)}
             </p>
           </div>
-          <Link href={`/${tenantSlug}`}>
+          <Link href={`/${tenantSlug}/checkout`}>
             <CustomButton>Continuar</CustomButton>
           </Link>
         </div>
