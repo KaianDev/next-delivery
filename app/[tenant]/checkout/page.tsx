@@ -36,19 +36,12 @@ const CheckoutPage = async ({ params }: CheckoutPageProps) => {
 
   const cartCookie = getCookie(`${tenant.slug}.cart`, { cookies })
   const cart = await api.getCartProducts(cartCookie as string)
-  const token = getCookie("delivery.token", { cookies })
-  const user = await api.authorizeToken(token as string)
 
   return (
     <div className="container min-h-dvh max-w-lg bg-white py-12">
       <Header backHref={`/${tenant.slug}/cart`} title="Checkout" />
 
-      <Checkout
-        cart={cart}
-        tenantSlug={tenant.slug}
-        user={user ? user : null}
-        token={token ?? ""}
-      />
+      <Checkout cart={cart} tenantSlug={tenant.slug} />
     </div>
   )
 }

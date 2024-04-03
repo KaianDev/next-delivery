@@ -1,3 +1,4 @@
+import { Address } from "@/types/address"
 import { CartCookie } from "@/types/cart-cookie"
 import { CartItem } from "@/types/cart-item"
 import { Product } from "@/types/product"
@@ -87,5 +88,23 @@ export const frontEndAPI = (tenantSlug: string) => ({
     }
 
     return cart
+  },
+
+  getUserAddresses: (email: string) => {
+    const addresses: Address[] = []
+
+    for (let i = 0; i < 5; i++) {
+      addresses.push({
+        id: i + 1,
+        cep: "99999999",
+        street: "Rua das Flores",
+        district: "Jardins",
+        city: "São Paulo",
+        state: "SP",
+        number: `${i + 1}00`,
+      })
+    }
+
+    return addresses
   },
 })

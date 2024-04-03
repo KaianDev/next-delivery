@@ -25,12 +25,11 @@ import { ButtonWithIcon } from "../../_components/button-with-icon"
 // Utilities
 import { formatMoney } from "@/helpers/formatMoney"
 import { DiscountCouponForm } from "./discount-coupon-form"
+import { useRouter } from "next/navigation"
 
 interface CheckoutProps {
   cart: CartItemType[]
   tenantSlug: string
-  token: string
-  user: User | null
 }
 
 export const Checkout = ({ cart, tenantSlug }: CheckoutProps) => {
@@ -41,6 +40,8 @@ export const Checkout = ({ cart, tenantSlug }: CheckoutProps) => {
   const [discountCoupon, setDiscountCoupon] = useState("")
   const [discountValue, setDiscountValue] = useState(0)
 
+  const router = useRouter()
+
   const subtotal = useMemo(() => {
     return cart.reduce(
       (acc, current) => (acc += current.product.price * current.qt),
@@ -49,16 +50,17 @@ export const Checkout = ({ cart, tenantSlug }: CheckoutProps) => {
   }, [cart])
 
   const handleSelectAddress = () => {
-    setShippingAddress({
-      id: 1,
-      cep: "62580000",
-      street: "Rua São José",
-      district: "Pedrinhas",
-      city: "Acaraú",
-      state: "CE",
-      number: "265",
-    })
-    setShippingPrice(10)
+    // setShippingAddress({
+    //   id: 1,
+    //   cep: "62580000",
+    //   street: "Rua São José",
+    //   district: "Pedrinhas",
+    //   city: "Acaraú",
+    //   state: "CE",
+    //   number: "265",
+    // })
+    // setShippingPrice(10)
+    router.push(`/${tenantSlug}/my-addresses`)
   }
 
   const handleDiscountSubmit = (coupon: string) => {
