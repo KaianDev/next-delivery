@@ -25,7 +25,6 @@ export const Quantity = ({
   setQuantity,
 }: QuantityProps) => {
   const handleIncreaseQuantity = () => {
-    console.log(initialValue)
     if (initialValue !== max) setQuantity(initialValue + 1)
   }
 

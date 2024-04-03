@@ -40,7 +40,7 @@ const CartPage = async ({ params }: CartPageProps) => {
   const user = await api.authorizeToken(token as string)
 
   return (
-    <div className="container max-w-lg bg-white py-12">
+    <div className="container min-h-dvh max-w-lg bg-white py-12">
       <Header backHref={`/${tenant.slug}`} title="Sacola" />
 
       <Cart

@@ -2,10 +2,9 @@
 
 import Link from "next/link"
 import { useMemo, useState } from "react"
-import { setCookie } from "cookies-next"
 import {
-  Check,
   ChevronRight,
+  CircleCheckBig,
   CircleDollarSign,
   CreditCard,
   MapPin,
@@ -14,19 +13,18 @@ import {
 
 import type { CartItem as CartItemType } from "@/types/cart-item"
 import type { User } from "@/types/user"
-import type { CartCookie } from "@/types/cart-cookie"
+import type { Address } from "@/types/address"
 
 // Components
 import { CustomButton } from "@/components/custom-button"
 import { Line } from "@/components/line"
-import { ShippingForm } from "./shippingForm"
 import { CartItem } from "@/app/[tenant]/_components/cart-item"
 import { CustomInput } from "@/components/custom-input"
 import { ButtonWithIcon } from "../../_components/button-with-icon"
 
 // Utilities
 import { formatMoney } from "@/helpers/formatMoney"
-import { Address } from "@/types/address"
+import { DiscountCouponForm } from "./discount-coupon-form"
 
 interface CheckoutProps {
   cart: CartItemType[]
@@ -35,14 +33,13 @@ interface CheckoutProps {
   user: User | null
 }
 
-export const Checkout = ({ cart: data, tenantSlug }: CheckoutProps) => {
+export const Checkout = ({ cart, tenantSlug }: CheckoutProps) => {
   const [shippingPrice, setShippingPrice] = useState(0)
   const [shippingAddress, setShippingAddress] = useState<Address>()
-  const [cart, setCart] = useState(data.filter((item) => item.qt > 0))
-  const [paymentChecked, setPaymentChecked] = useState({
-    money: true,
-    card: false,
-  })
+
+  const [paymentType, setPaymentType] = useState<"money" | "card">("money")
+  const [discountCoupon, setDiscountCoupon] = useState("")
+  const [discountValue, setDiscountValue] = useState(0)
 
   const subtotal = useMemo(() => {
     return cart.reduce(
@@ -50,37 +47,6 @@ export const Checkout = ({ cart: data, tenantSlug }: CheckoutProps) => {
       0,
     )
   }, [cart])
-
-  const handleCartChange = (quantity: number, id: number) => {
-    const newCart = [...cart]
-      .map((item) => {
-        if (item.product.id === id) {
-          item.qt = quantity
-        }
-        return item
-      })
-      .filter((item) => item.qt !== 0)
-
-    const cartCookie: CartCookie[] = []
-
-    for (let item of newCart) {
-      if (item.qt > 0) {
-        cartCookie.push({
-          id: item.product.id,
-          qt: item.qt,
-        })
-      }
-    }
-
-    setCookie(`${tenantSlug}.cart`, JSON.stringify(cartCookie))
-    setCart(newCart)
-  }
-
-  const handleTogglePaymentType = () => {
-    setPaymentChecked((prev) =>
-      prev.card ? { card: false, money: true } : { card: true, money: false },
-    )
-  }
 
   const handleSelectAddress = () => {
     setShippingAddress({
@@ -93,6 +59,11 @@ export const Checkout = ({ cart: data, tenantSlug }: CheckoutProps) => {
       number: "265",
     })
     setShippingPrice(10)
+  }
+
+  const handleDiscountSubmit = (coupon: string) => {
+    setDiscountCoupon(coupon)
+    setDiscountValue(10)
   }
 
   return (
@@ -117,20 +88,20 @@ export const Checkout = ({ cart: data, tenantSlug }: CheckoutProps) => {
           <div className="flex gap-6">
             <ButtonWithIcon
               label="Dinheiro"
-              checked={paymentChecked.money}
-              onClick={handleTogglePaymentType}
+              checked={paymentType === "money"}
+              onClick={() => setPaymentType("money")}
               rightIcon={<CircleDollarSign size={24} />}
             />
             <ButtonWithIcon
               label="Cartão"
-              checked={paymentChecked.card}
-              onClick={handleTogglePaymentType}
+              checked={paymentType === "card"}
+              onClick={() => setPaymentType("card")}
               rightIcon={<CreditCard size={24} />}
             />
           </div>
         </div>
 
-        {paymentChecked.money && (
+        {paymentType === "money" && (
           <div>
             <p className="mb-2">Troco</p>
             <div>
@@ -141,12 +112,16 @@ export const Checkout = ({ cart: data, tenantSlug }: CheckoutProps) => {
 
         <div>
           <p className="mb-2">Cupom de desconto</p>
-          <ButtonWithIcon
-            label="BURGER10"
-            rightIcon={<Ticket size={24} />}
-            leftIcon={<Check size={24} />}
-            onClick={() => {}}
-          />
+          {discountCoupon ? (
+            <ButtonWithIcon
+              label={discountCoupon}
+              rightIcon={<Ticket size={24} />}
+              leftIcon={<CircleCheckBig size={20} />}
+              onClick={() => {}}
+            />
+          ) : (
+            <DiscountCouponForm onSubmit={handleDiscountSubmit} />
+          )}
         </div>
       </div>
 
@@ -156,29 +131,34 @@ export const Checkout = ({ cart: data, tenantSlug }: CheckoutProps) => {
 
       <div className="my-2 border-b-2">
         {cart.map((item) => (
-          <CartItem
-            key={item.product.id}
-            cartItem={item}
-            onChange={handleCartChange}
-          />
+          <CartItem key={item.product.id} cartItem={item} />
         ))}
       </div>
 
       <div className="space-y-4">
         <div className="mt-6 p-4">
-          <div className="grid grid-cols-[1fr_120px] gap-y-4  font-semibold">
+          <div className="flex justify-between gap-4 font-semibold">
             <p>Subtotal</p>
             <p className="text-end">{formatMoney(subtotal)}</p>
+          </div>
+          {discountCoupon && (
+            <div className="flex justify-between gap-4 font-semibold">
+              <p>Desconto</p>
+              <p> - {formatMoney(discountValue)}</p>
+            </div>
+          )}
+          <div className="flex justify-between gap-4 font-semibold">
             <p>Frete</p>
             <p className="text-end">
               {shippingPrice > 0 ? formatMoney(shippingPrice) : "--"}
             </p>
           </div>
+
           <Line className="my-4 border-dashed" />
           <div className="mb-6 flex items-center justify-between">
             <p>Total</p>
             <p className="text-2xl font-semibold text-tenant-primary">
-              {formatMoney(subtotal + shippingPrice)}
+              {formatMoney(subtotal - discountValue + shippingPrice)}
             </p>
           </div>
           <Link href={`/${tenantSlug}/orders`}>

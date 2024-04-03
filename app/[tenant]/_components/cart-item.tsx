@@ -13,7 +13,7 @@ import { formatQuantity } from "@/helpers/formatQuantity"
 
 interface CartItemProps {
   cartItem: CartItemType
-  onChange: (quantity: number, id: number) => void
+  onChange?: (quantity: number, id: number) => void
   editable?: boolean
 }
 
@@ -37,7 +37,7 @@ export const CartItem = ({ cartItem, onChange, editable }: CartItemProps) => {
           {formatMoney(cartItem.product.price)}
         </p>
       </div>
-      {editable && (
+      {editable && onChange && (
         <div>
           <Quantity
             variant="small"
