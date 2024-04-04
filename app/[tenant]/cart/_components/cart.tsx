@@ -2,10 +2,8 @@
 
 import Link from "next/link"
 import { useMemo, useState } from "react"
-import { setCookie } from "cookies-next"
 
 import type { CartItem as CartItemType } from "@/types/cart-item"
-import type { User } from "@/types/user"
 import type { CartCookie } from "@/types/cart-cookie"
 
 // Components
@@ -16,12 +14,11 @@ import { CartItem } from "@/app/[tenant]/_components/cart-item"
 
 // Utilities
 import { formatMoney } from "@/helpers/formatMoney"
+import { updateCartCookie } from "@/action/cart"
 
 interface CartProps {
   cart: CartItemType[]
   tenantSlug: string
-  token: string
-  user: User | null
 }
 
 export const Cart = ({ cart: data, tenantSlug }: CartProps) => {
@@ -63,8 +60,7 @@ export const Cart = ({ cart: data, tenantSlug }: CartProps) => {
         })
       }
     }
-
-    setCookie(`${tenantSlug}.cart`, JSON.stringify(cartCookie))
+    updateCartCookie(tenantSlug, cartCookie)
     setCart(newCart)
   }
 
@@ -121,7 +117,7 @@ export const Cart = ({ cart: data, tenantSlug }: CartProps) => {
             </p>
           </div>
           <Link href={`/${tenantSlug}/checkout`}>
-            <CustomButton>Continuar</CustomButton>
+            <CustomButton disabled={cart.length === 0}>Continuar</CustomButton>
           </Link>
         </div>
       </div>
