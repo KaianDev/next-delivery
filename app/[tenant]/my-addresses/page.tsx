@@ -35,16 +35,15 @@ const CheckoutPage = async ({ params }: CheckoutPageProps) => {
   if (!tenant) {
     return notFound()
   }
-
-  const token = getCookie("delivery.token", { cookies })
+  const cookieStore = cookies()
+  const token = cookieStore.get("delivery.token")?.value
   const user = await api.authorizeToken(token as string)
-  console.log({ user })
+
   if (!user) {
     redirect(`/${tenant.slug}/login`)
   }
 
   const addresses = await api.getUserAddresses(user.email)
-  console.log({ addresses })
 
   return (
     <div className="container flex min-h-dvh max-w-lg flex-col bg-white py-12">

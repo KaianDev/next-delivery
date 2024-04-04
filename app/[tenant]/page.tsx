@@ -2,9 +2,10 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { cookies } from "next/headers"
 
+// Components
+import { Home } from "./_components/home"
 // Utilities
 import { frontEndAPI } from "@/lib/frontend-api"
-import { Home } from "./_components/home"
 
 interface HomePageProps {
   params: {
@@ -25,6 +26,7 @@ const HomePage = async ({ params }: HomePageProps) => {
   const tenant = api.getTenant()
   if (!tenant) return notFound()
   const products = api.getAllProducts()
+
   const token = cookies().get("delivery.token")?.value
   const user = await api.authorizeToken(token as string)
 

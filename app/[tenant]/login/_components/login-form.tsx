@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { useRouter } from "next/navigation"
 import { z } from "zod"
 
 // Components
@@ -14,8 +15,10 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form"
+
+// Utilities
 import { useAuthContext } from "@/contexts/auth"
-import { useRouter } from "next/navigation"
+import { addAuthCookie } from "@/action/auth"
 
 const loginSchema = z.object({
   email: z
@@ -45,13 +48,15 @@ export const LoginForm = ({ tenantSlug }: LoginFormProps) => {
   const router = useRouter()
 
   const handleLoginSubmit = (data: LoginSchema) => {
+    const token = "1235sas888"
     login(
       {
         email: data.email,
         name: "Kaian",
       },
-      "jasdçlasdkçalskdçalwkçlpowqkepowqkke120-21030213123-0ksaçldçasld",
+      token,
     )
+    addAuthCookie(token)
     router.replace(`/${tenantSlug}`)
   }
 

@@ -9,6 +9,7 @@ import {
   ShoppingBag,
   Utensils,
 } from "lucide-react"
+import { useState } from "react"
 
 // Components
 import { Button } from "@/components/ui/button"
@@ -16,8 +17,10 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { CustomButton } from "@/components/custom-button"
 import { Line } from "@/components/line"
 import { MenuItem } from "./menu-item"
+
+// Utilities
 import { useAuthContext } from "@/contexts/auth"
-import { useState } from "react"
+import { removeAuthCookie } from "@/action/auth"
 
 interface SideMenuProps {
   tenantSlug: string
@@ -33,6 +36,7 @@ export const SideMenu = ({ tenantSlug }: SideMenuProps) => {
 
   const handleLogout = () => {
     logout()
+    removeAuthCookie()
     setOpen(false)
   }
 
